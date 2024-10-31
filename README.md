@@ -20,14 +20,14 @@
 #### Установка
 1. Клонируйте этот репозиторий:
    ```
-   git clone https://github.com/yourusername/yolo-object-detection.git
-   cd yolo-object-detection
+   git clone https://github.com/IvanKarpovich/computer_vision.git
+   cd computer_vision
    ```
 2. Установите необходимые пакеты:
    ```
    pip install -r requirements.txt
    ```
-3. Загрузите веса модели YOLO (если они ещё не присутствуют в директории проекта).
+3. Загрузите веса модели YOLO.
 
 #### Использование
 Запустите скрипт, используя следующую команду:
