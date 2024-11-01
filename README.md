@@ -14,11 +14,16 @@
    git clone https://github.com/IvanKarpovich/computer_vision.git
    cd computer_vision
    ```
-2. Установите необходимые пакеты:
+2. Создайте виртуальную среду:
+   ```
+   conda create --name computer_vision
+   conda activate computer_vision
+   ```
+   Установите в нее необходимые пакеты:
    ```
    pip install -r requirements.txt
    ```
-3. Загрузите веса модели YOLO.
+4. Загрузите веса модели YOLO.
 (скрипт автоматически загружает модель YOLO, если она не найдена в директории проекта.)
 
 #### Использование
