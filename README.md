@@ -4,7 +4,7 @@
 ![image](https://github.com/user-attachments/assets/9960275b-b614-42b9-b39c-c4c161fcb355)
 
 #### Установка
-1. Клонируйте этот репозиторий:
+1. Скопируйте этот репозиторий:
    ```
    git clone https://github.com/IvanKarpovich/computer_vision.git
    cd computer_vision
