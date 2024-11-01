@@ -2,6 +2,7 @@
 Для детекции людей в данном проекте используется модель YOLOv11 (You Only Look Once) с предобученными весами.
 
 ![image](https://github.com/user-attachments/assets/9960275b-b614-42b9-b39c-c4c161fcb355)
+Пример работы программы приведен по ссылке: https://drive.google.com/file/d/1AWflnUYHO7mMkHd_Fxm09OE2ckBr74zH/view?usp=sharing
 
 #### Установка
 1. Скопируйте этот репозиторий:
