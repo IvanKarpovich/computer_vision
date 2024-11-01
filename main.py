@@ -30,12 +30,15 @@ class YOLO_Object_Detection:
             (47, 79, 79), (47, 79, 47), (0, 206, 209), (148, 0, 211), (255, 20, 147)
         ]
 
-    def detect_objects(self, input_video_path, output_video_path):
+    def detect_objects(self, input_video_path, output_video_path, class_to_display):
         """
         Обнаруживает объекты в указанном видеофайле и сохраняет результаты в новом видеофайле.
         :param input_video_path: путь к исходному видеофайлу
         :param output_video_path: путь к выходному видеофайлу
         """
+
+        input_video_path = ROOT / input_video_path
+        output_video_path = ROOT / output_video_path
        
         capture = cv2.VideoCapture(input_video_path)
 
@@ -58,12 +61,14 @@ class YOLO_Object_Detection:
             boxes = results.boxes.xyxy.cpu().numpy().astype(np.int32)
             
             for class_id, box, conf in zip(classes, boxes, results.boxes.conf):
-                if conf > 0.5:
+                if conf > 0.5 and ( class_id == class_to_display or class_to_display != 0):
                     class_name = classes_names[int(class_id)]
                     color = self.colors[int(class_id) % len(self.colors)]
                     x1, y1, x2, y2 = box
                     cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                     cv2.putText(frame, class_name, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                    cv2.putText(frame, f"Confidence: {conf:.2f}", (x1, y1 - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+
 
             writer.write(frame)
 
@@ -71,17 +76,15 @@ class YOLO_Object_Detection:
       """
       Parse command-line arguments for YOLOv5 detection, allowing custom inference options and model configurations.
 
-      Args:
-          --weights (str | list[str], optional): Model path or Triton URL. Defaults to ROOT / 'yolov5s.pt'.
-          --source (str, optional): File/dir/URL/glob/screen/0(webcam). Defaults to ROOT / 'data/images'.
-
       Returns:
           argparse.Namespace: Parsed command-line arguments as an argparse.Namespace object.
 
       """
       parser = argparse.ArgumentParser()
 
-      parser.add_argument("--source", type=str, default=ROOT / "data/images", help="file/dir/URL/glob/screen/0(webcam)")
+      parser.add_argument("--input_video_path", type=str, default="crowd.mp4")
+      parser.add_argument("--output_video_path", type=str, default="output.mp4")
+      parser.add_argument("--class_to_display", type=str, default = 0) 
 
       opt = parser.parse_args()
 
@@ -89,8 +92,5 @@ class YOLO_Object_Detection:
 
 if __name__ == '__main__':
     detector = YOLO_Object_Detection()
-    print(detector.parse_opt())
-    input_video_path = 'crowd.mp4'
-    output_video_path = 'detect.mp4'
 
-    detector.detect_objects(input_video_path, output_video_path)
+    detector.detect_objects(**vars(detector.parse_opt()))
