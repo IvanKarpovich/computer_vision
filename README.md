@@ -35,7 +35,7 @@ python main.py [options]
 #### Пример использования
    Обнаружение только определённых классов (например, людей) в видеофайлах:
    ```
-   python main.py --classes 0  --input_video_path crowd.mp4 --output_video_path detect.mp4
+   python main.py --classes 0  --input_video_path input.mp4 --output_video_path output.mp4
    ```
 
 #### Структура проекта
